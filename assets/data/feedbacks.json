@@ -1,0 +1,47 @@
+[
+  {
+    "id": "1",
+    "createdAt": "3 min ago",
+    "comment": "Cool NodeMCU Project !",
+    "User": {
+      "name": "Anna",
+      "image": "https://randomuser.me/api/portraits/women/26.jpg"
+    }
+  },
+  {
+    "id": "2",
+    "createdAt": "10 min ago",
+    "comment": "Great Project Idea 💡",
+    "User": {
+      "name": "Arihant",
+      "image": "https://randomuser.me/api/portraits/men/7.jpg"
+    }
+  },
+  {
+    "id": "3",
+    "createdAt": "20 min ago",
+    "comment": "Nice Project Idea 👍 ",
+    "User": {
+      "name": "Rohit",
+      "image": "https://randomuser.me/api/portraits/men/45.jpg"
+    }
+  },
+  {
+    "id": "4",
+    "createdAt": "25 min ago",
+    "comment": "Awesome Stuff 🚀 ",
+    "User": {
+      "name": "Joe",
+      "image": "https://randomuser.me/api/portraits/men/32.jpg"
+    }
+  },
+  {
+    "id": "5",
+    "createdAt": "30 min ago",
+    "comment": "Cool Idea to Implement 💪",
+    "User": {
+      "name": "Julie",
+      "image": "https://randomuser.me/api/portraits/women/3.jpg"
+    }
+  }
+]
