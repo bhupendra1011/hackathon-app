@@ -2,6 +2,7 @@
   "id": "1",
   "createdAt": "10 min ago",
   "title": "IOT | Contactless Record Entry System  ",
+  "description": "NodeMCU Microcontroller with RFID Reader,OLED Screen. RealTime Data is shown on User Dashboard through ThinkSpeak API",
   "thumbnail": "https://i.ibb.co/HrhTkg2/iot-proj.jpg",
   "videoUrl": "https://res.cloudinary.com/dqbrq8pbi/video/upload/v1624810540/hackathon/Zero_Contact_Record_Entry_System_eh1sic.mp4",
   "duration": 384,
