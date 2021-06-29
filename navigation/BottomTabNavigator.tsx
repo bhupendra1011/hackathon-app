@@ -15,7 +15,7 @@ import useColorScheme from '../hooks/useColorScheme';
 import HomeScreen from '../screens/HomeScreen';
 import TabTwoScreen from '../screens/UploadIdeaScreen';
 import UnderConstructionScreen from '../screens/UnderConstructionScreem';
-import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../types';
+import { BottomTabParamList, HomeParamList, UploadParamList } from '../types';
 import UploadIdeaScreen from '../screens/UploadIdeaScreen';
 import CustomHeader from '../components/CustomHeader';
 
@@ -31,7 +31,7 @@ export default function BottomTabNavigator() {
     >
       <BottomTab.Screen
         name="Home"
-        component={TabOneNavigator}
+        component={HomeNavigator}
         options={{
           tabBarIcon: ({ color }) => <Ionicons name="home-outline" size={24} color={color} />,
         }}
@@ -45,7 +45,7 @@ export default function BottomTabNavigator() {
       />
       <BottomTab.Screen
         name="Idea"
-        component={UploadIdeaScreen}
+        component={UploadNavigator}
         options={{
           tabBarIcon: ({ color }) => <AntDesign name="pluscircleo" size={24} color={color} />,
         }}
@@ -77,33 +77,33 @@ function TabBarIcon(props: { name: React.ComponentProps<typeof Ionicons>['name']
 
 // Each tab has its own navigation stack, you can read more about this pattern here:
 // https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
-const TabOneStack = createStackNavigator<TabOneParamList>();
+const HomeStack = createStackNavigator<HomeParamList>();
 
 
-function TabOneNavigator() {
+function HomeNavigator() {
   return (
-    <TabOneStack.Navigator screenOptions={{
-      header: () => <CustomHeader />
+    <HomeStack.Navigator screenOptions={{
+      header: () => <CustomHeader enableSearch={true} />
     }}>
-      <TabOneStack.Screen
+      <HomeStack.Screen
         name="HomeScreen"
         component={HomeScreen}
-        options={{ headerTitle: 'Tab One Title' }}
       />
-    </TabOneStack.Navigator>
+    </HomeStack.Navigator>
   );
 }
 
-const TabTwoStack = createStackNavigator<TabTwoParamList>();
+const UploadStack = createStackNavigator<UploadParamList>();
 
-function TabTwoNavigator() {
+function UploadNavigator() {
   return (
-    <TabTwoStack.Navigator>
-      <TabTwoStack.Screen
-        name="TabTwoScreen"
+    <UploadStack.Navigator screenOptions={{
+      header: () => <CustomHeader enableSearch={false} />
+    }}>
+      <UploadStack.Screen
+        name="UploadScreen"
         component={UploadIdeaScreen}
-        options={{ headerTitle: 'Tab Two Title' }}
       />
-    </TabTwoStack.Navigator>
+    </UploadStack.Navigator>
   );
 }

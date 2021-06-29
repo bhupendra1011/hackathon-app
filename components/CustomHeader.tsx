@@ -5,24 +5,23 @@ import { Text, useThemeColor, View } from './Themed';
 import { MonoText } from './StyledText';
 import { Ionicons } from '@expo/vector-icons';
 import useColorScheme from '../hooks/useColorScheme';
-import Colors from '../constants/Colors';
 
+interface headerProps {
+    enableSearch: boolean
+}
 
-
-export default function CustomHeader() {
+export default function CustomHeader(props: headerProps) {
     const theme = useColorScheme();
     const color = useThemeColor({}, 'text');
 
     return (
-        <>
-            <SafeAreaView>
-                <View style={styles.container}>
-                    <MonoText style={styles.title}> HACKATHON Q3 2021 </MonoText>
-                    <Ionicons name="search-outline" size={24} color={color} />
-                </View>
-            </SafeAreaView>
+        <SafeAreaView>
+            <View style={styles.container}>
+                <MonoText style={styles.title}> HACKATHON Q3 2021 </MonoText>
+                {props.enableSearch && <Ionicons name="search-outline" size={24} color={color} />}
+            </View>
             <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-        </>
+        </SafeAreaView>
     );
 }
 

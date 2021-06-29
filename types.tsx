@@ -16,10 +16,10 @@ export type BottomTabParamList = {
   Profile: undefined;
 };
 
-export type TabOneParamList = {
+export type HomeParamList = {
   HomeScreen: undefined;
 };
 
-export type TabTwoParamList = {
-  TabTwoScreen: undefined;
+export type UploadParamList = {
+  UploadScreen: undefined;
 };
