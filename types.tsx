@@ -18,6 +18,7 @@ export type BottomTabParamList = {
 
 export type HomeParamList = {
   HomeScreen: undefined;
+  DetailScreen:undefined;
 };
 
 export type UploadParamList = {
