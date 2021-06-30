@@ -3,12 +3,17 @@ import { StyleSheet } from 'react-native';
 
 
 import { Text, View } from '../components/Themed';
+import VideoPlayer from '../components/VideoPlayer';
 
 export default function UnderConstructionScreen() {
     return (
         <View style={styles.container}>
             <Text style={styles.title}> 🛠 Screen Under Construction </Text>
             <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+            {/* TODO: to remove */}
+            <VideoPlayer
+                videoURI="https://res.cloudinary.com/dqbrq8pbi/video/upload/v1624810540/hackathon/Zero_Contact_Record_Entry_System_eh1sic.mp4"
+                thumbnailURI="https://i.ibb.co/HrhTkg2/iot-proj.jpg" />
         </View>
     );
 }
