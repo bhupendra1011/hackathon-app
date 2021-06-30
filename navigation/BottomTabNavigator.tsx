@@ -108,7 +108,7 @@ function UploadNavigator() {
     }}>
       <UploadStack.Screen
         name="UploadScreen"
-        component={DetailScreen}
+        component={UploadIdeaScreen}
       />
     </UploadStack.Navigator>
   );

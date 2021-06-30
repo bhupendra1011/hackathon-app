@@ -61,7 +61,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    width: '100%', flexDirection: 'row'
+    width: '100%', flexDirection: 'row',
+
   },
   vote_icon: {
     flex: 1,
