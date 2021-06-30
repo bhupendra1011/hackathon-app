@@ -7,6 +7,7 @@ import * as ImagePicker from 'expo-image-picker';
 
 
 import { Text, View } from '../components/Themed';
+import VideoPlayer from '../components/VideoPlayer';
 
 export default function UploadIdeaScreen() {
 
@@ -56,6 +57,8 @@ export default function UploadIdeaScreen() {
       <TextBox style={styles.textBox} placeholder="Enter Project Desc here ..." value={description} onChangeText={setDescription} multiline={true} />
 
       <Button title="Pick a video from camera roll" style={styles.videoSel} onPress={pickVideo} />
+
+      {video && <VideoPlayer videoURI={video} width='80%' style={{ marginTop: 20 }} />}
 
       <Button title="Submit Your Idea" style={styles.btnSubmit} onPress={uploadProject} />
     </View>

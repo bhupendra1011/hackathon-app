@@ -5,20 +5,22 @@ import { View, Text } from './Themed'
 import { Video } from "expo-av"
 
 interface VideoPlayerProps {
+    width?: string,
     videoURI: string,
-    thumbnailURI?: string
+    thumbnailURI?: string,
+    style?: object
 }
 
 const VideoPlayer = (props: VideoPlayerProps) => {
-    const { videoURI, thumbnailURI } = props;
+    const { videoURI, thumbnailURI, width = '100%', style = {} } = props;
     return (
         <View>
             <Video
                 source={{ uri: videoURI }}
-                style={{ width: '100%', aspectRatio: 16 / 9 }}
+                style={{ ...style, width: width, aspectRatio: 16 / 9 }}
                 posterSource={{ uri: thumbnailURI }}
                 posterStyle={{
-                    resizeMode: 'cover'
+                    resizeMode: "contain"
                 }}
                 usePoster={false}
                 useNativeControls
