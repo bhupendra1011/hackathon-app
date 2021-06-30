@@ -30,8 +30,8 @@ export default function UnderConstructionScreen() {
             </Pressable>
 
 
-            <BottomSheet ref={commentsSheetRef} snapPoints={[0, '50%']} index={0}
-                backgroundComponent={({ style }) => <View style={[style, { backgroundColor: "grey" }]} />}
+            <BottomSheet ref={commentsSheetRef} snapPoints={[0, '40%']} index={0}
+                backgroundComponent={({ style }) => <View style={[style, { backgroundColor: "red" }]} />}
             >
                 <Comments comments={comments} />
             </BottomSheet>
