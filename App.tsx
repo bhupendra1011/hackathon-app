@@ -7,7 +7,13 @@ import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
 
-export default function App() {
+import Amplify from 'aws-amplify'
+import config from './src/aws-exports'
+import { withAuthenticator } from 'aws-amplify-react-native'
+
+Amplify.configure(config)
+
+function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
 
@@ -22,3 +28,4 @@ export default function App() {
     );
   }
 }
+export default withAuthenticator(App);
