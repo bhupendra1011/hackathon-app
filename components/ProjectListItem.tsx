@@ -1,23 +1,24 @@
 import React from "react";
-import {
-  StyleSheet,
-  Image,
-  TouchableHighlight,
-} from "react-native";
+import { StyleSheet, Image, TouchableOpacity } from "react-native";
 import { Text, View } from "./Themed";
 import ProfilePicture from "../components/ProfilePicture";
 import VotingBar from "../components/VotingBar";
 import { Props } from "../constants/types";
 
 const ProjectListItem = ({ data }: Props) => {
+  const openDetailsPage = () => console.warn("open next ");
+
   return (
-    <View style={styles.container}>
+
+    <TouchableOpacity onPress={openDetailsPage}>
+      {/* Project Image */}
       <Image
-        style={styles.img_container}
+        style={styles.thumbnail}
         source={{
           uri: data.thumbnail,
         }}
       />
+      {/* Project Details Row */}
       <View
         style={[
           styles.container,
@@ -56,13 +57,14 @@ const ProjectListItem = ({ data }: Props) => {
           </View>
         </View>
       </View>
-
       <View
         style={styles.separator}
         lightColor="#eee"
         darkColor="rgba(255,255,255,0.1)"
       />
-    </View>
+    </TouchableOpacity>
+
+
   );
 };
 
@@ -72,20 +74,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  img_container: {
-    height: 180,
-    alignSelf: "stretch",
+  thumbnail: {
+    width: "100%",
+    aspectRatio: 16 / 9,
   },
   title: {
     fontSize: 20,
     fontWeight: "bold",
   },
   separator: {
-    marginVertical: 5,
-    height: 1,
-    width: "80%",
-    borderBottomColor: "white",
-    borderBottomWidth: 1,
+    marginVertical: 10,
+    height: 2,
+    width: "100%",
   },
   fs13: {
     fontSize: 13,

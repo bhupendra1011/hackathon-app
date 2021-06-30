@@ -1,18 +1,16 @@
 import * as React from "react";
-import { StyleSheet, ScrollView } from "react-native";
-import {  View } from "../components/Themed";
+import { StyleSheet, FlatList } from "react-native";
+
 import projects from "../assets/data/projects.json";
 import ProjectListItem from "../components/ProjectListItem";
 
 export default function HomeScreen() {
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        {projects.map((project) => (
-          <ProjectListItem data={project} key={project.id}/>
-        ))}
-      </View>
-    </ScrollView>
+
+    <FlatList data={projects}
+      renderItem={({ item }) => <ProjectListItem data={item} />}
+      keyExtractor={(item) => item.id}
+    />
   );
 }
 const styles = StyleSheet.create({
