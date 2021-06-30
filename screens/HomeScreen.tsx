@@ -1,20 +1,20 @@
-import * as React from 'react';
-import { StyleSheet } from 'react-native';
-
-import EditScreenInfo from '../components/EditScreenInfo';
-import ProfilePicture from '../components/ProfilePicture';
-import { Text, View } from '../components/Themed';
+import * as React from "react";
+import { StyleSheet, ScrollView } from "react-native";
+import {  View } from "../components/Themed";
+import projects from "../assets/data/projects.json";
+import ProjectListItem from "../components/ProjectListItem";
 
 export default function HomeScreen() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Home Screen</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-
-    </View>
+    <ScrollView>
+      <View style={styles.container}>
+        {projects.map((project) => (
+          <ProjectListItem data={project} key={project.id}/>
+        ))}
+      </View>
+    </ScrollView>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
