@@ -31,7 +31,7 @@ const TextBox = (props: TextBoxProps) => {
                     borderWidth: 2,
                     borderColor: borderColor,
                     color: borderColor,
-                    fontSize: 18,
+                    fontSize: 16,
                     padding: 10,
                     borderRadius: 6
 
