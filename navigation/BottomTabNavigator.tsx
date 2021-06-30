@@ -13,6 +13,8 @@ import * as React from 'react';
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import HomeScreen from '../screens/HomeScreen';
+import DetailScreen from '../screens/DetailScreen';
+
 import TabTwoScreen from '../screens/UploadIdeaScreen';
 import UnderConstructionScreen from '../screens/UnderConstructionScreem';
 import { BottomTabParamList, HomeParamList, UploadParamList } from '../types';
@@ -89,6 +91,10 @@ function HomeNavigator() {
         name="HomeScreen"
         component={HomeScreen}
       />
+      <HomeStack.Screen
+        name="DetailScreen"
+        component={DetailScreen}
+      />
     </HomeStack.Navigator>
   );
 }
@@ -102,7 +108,7 @@ function UploadNavigator() {
     }}>
       <UploadStack.Screen
         name="UploadScreen"
-        component={UploadIdeaScreen}
+        component={DetailScreen}
       />
     </UploadStack.Navigator>
   );
