@@ -19,6 +19,8 @@ interface ProjectCommentProps {
 const Comments = ({ comments, projectID }: ProjectCommentProps) => {
     const [newComment, setNewComment] = React.useState("");
 
+    const [feedbacks, setFeedbacks] = React.useState(() => comments)
+
     const color = useThemeColor({}, 'text');
 
     const submitCommit = async () => {
@@ -35,19 +37,17 @@ const Comments = ({ comments, projectID }: ProjectCommentProps) => {
             return;
         }
 
-
-
         await DataStore.save(new CommentModel({
             comment: newComment,
             projectID,
             userID: user.id
         })
         );
+        setFeedbacks([...feedbacks, {
+            id: new Date().getTime().toString()
+            , comment: newComment
+        }])
         setNewComment("");
-
-
-
-
 
     }
 
@@ -62,7 +62,7 @@ const Comments = ({ comments, projectID }: ProjectCommentProps) => {
                 </Pressable>
             </View>
             <BottomSheetFlatList
-                data={comments}
+                data={feedbacks}
                 renderItem={({ item }) => <Comment comment={item} />}
             />
         </View>

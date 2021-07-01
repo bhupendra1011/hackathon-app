@@ -165,7 +165,7 @@ const UserInfo = ({ data }: Props) => {
                     styles.container,
                     {
                         flexDirection: "row",
-                        justifyContent: "space-around",
+                        justifyContent: "flex-start",
                         alignContent: 'flex-start',
 
 
@@ -182,6 +182,7 @@ const UserInfo = ({ data }: Props) => {
                         styles.font_small,
                         {
                             flexDirection: "column",
+                            marginLeft: 10
                         }
                     ]}
                 >

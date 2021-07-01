@@ -46,7 +46,26 @@ const VotingBar = ({ data, isEnabled, size = 20, style = {} }: Props) => {
   })
 
   const pushVote = (type: string) => {
-    setVoteStatus({ ...voteStatus, [type]: !voteStatus[type] })
+    setVoteStatus({ ...voteStatus, [type]: !voteStatus[type] });
+
+    switch (type) {
+      case 'creative':
+        const status = voteStatus.creative;
+        status ? setCreativeVotesCount(prev => prev - 1) : setCreativeVotesCount(prev => prev + 1);
+        break;
+      case 'technical':
+        const status1 = voteStatus.technical;
+        status1 ? setTechVotesCount(prev => prev - 1) : setTechVotesCount(prev => prev + 1);
+        break;
+
+      case 'value':
+        const status2 = voteStatus.value;
+        status2 ? setValueVotesCount(prev => prev - 1) : setValueVotesCount(prev => prev + 1);
+        break;
+
+
+      default: null
+    }
   };
 
   return (
