@@ -28,4 +28,5 @@ function App() {
     );
   }
 }
-export default withAuthenticator(App);
+//TODO: Add withAuthenticator
+export default App;

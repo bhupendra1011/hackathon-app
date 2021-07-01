@@ -6,12 +6,15 @@ import { useThemeColor } from "./Themed";
 import { Props } from "../constants/types";
 
 
-const VoteIcon = ({ type, status, size = 20 }: { type: string, status: boolean, size?: number }) => {
+const VoteIcon = ({ type, status, size = 20, setVote }: { type: string, status: boolean, size?: number }) => {
+
+  //update count of parent component
 
 
   switch (type) {
     case 'creative':
       const creativeColor = useThemeColor({}, "creativeIcon");
+
       return (status ? <Ionicons name="ios-bulb" size={size} color={creativeColor} /> : <Ionicons name="ios-bulb-outline" size={size} color={creativeColor} />);
       break;
     case 'technical':
@@ -27,9 +30,17 @@ const VoteIcon = ({ type, status, size = 20 }: { type: string, status: boolean, 
   }
 }
 
-const VotingBar = ({ data, isEnabled, size = 20 }: Props) => {
+const VotingBar = ({ data, isEnabled, size = 20, style = {} }: Props) => {
+
+
+
+  const [techVotesCount, setTechVotesCount] = React.useState(() => data.techVotes)
+  const [creativeVotesCount, setCreativeVotesCount] = React.useState(() => data.techVotes)
+  const [valueVotesCount, setValueVotesCount] = React.useState(() => data.techVotes)
+
+  //TODO: This is will be based on current user's vote status.
   const [voteStatus, setVoteStatus] = useState({
-    creative: true,
+    creative: false,
     technical: false,
     value: false
   })
@@ -39,19 +50,19 @@ const VotingBar = ({ data, isEnabled, size = 20 }: Props) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={{ ...style, flexDirection: "row", alignItems: "center" }}>
       <TouchableOpacity disabled={!isEnabled} onPress={() => pushVote('creative')} style={styles.vote_icon}>
-        <VoteIcon type='creative' status={voteStatus.creative} size={size} />
-        <Text style={{ fontSize: size - 5 }}>{data.creativeVotes}</Text>
+        <VoteIcon type='creative' status={voteStatus.creative} size={size} setVote={setCreativeVotesCount} />
+        <Text style={{ fontSize: size - 5, marginLeft: 5 }}>{creativeVotesCount}</Text>
       </TouchableOpacity>
       <TouchableOpacity disabled={!isEnabled} onPress={() => pushVote('technical')} style={styles.vote_icon}>
-        <VoteIcon type='technical' status={voteStatus.technical} size={size} />
-        <Text style={{ fontSize: size - 5 }}>{data.techVotes}</Text>
+        <VoteIcon type='technical' status={voteStatus.technical} size={size} setVote={setTechVotesCount} />
+        <Text style={{ fontSize: size - 5, marginLeft: 5 }}>{techVotesCount}</Text>
       </TouchableOpacity>
       <TouchableOpacity disabled={!isEnabled} onPress={() => pushVote('value')} style={styles.vote_icon}>
 
-        <VoteIcon type='value' status={voteStatus.value} size={size} />
-        <Text style={{ fontSize: size - 5 }}>{data.valueVotes}</Text>
+        <VoteIcon type='value' status={voteStatus.value} size={size} setVote={setValueVotesCount} />
+        <Text style={{ fontSize: size - 5, marginLeft: 5 }}>{valueVotesCount}</Text>
       </TouchableOpacity>
     </View>
   );
@@ -59,9 +70,9 @@ const VotingBar = ({ data, isEnabled, size = 20 }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+
     alignItems: "center",
-    width: '100%', flexDirection: 'row',
+    flexDirection: 'row',
 
   },
   vote_icon: {

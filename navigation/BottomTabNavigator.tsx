@@ -20,6 +20,7 @@ import UnderConstructionScreen from '../screens/UnderConstructionScreem';
 import { BottomTabParamList, HomeParamList, UploadParamList } from '../types';
 import UploadIdeaScreen from '../screens/UploadIdeaScreen';
 import CustomHeader from '../components/CustomHeader';
+import DetailInfo from '../components/DetailInfo';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -93,7 +94,7 @@ function HomeNavigator() {
       />
       <HomeStack.Screen
         name="DetailScreen"
-        component={DetailScreen}
+        component={DetailInfo}
       />
     </HomeStack.Navigator>
   );

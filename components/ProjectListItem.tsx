@@ -6,11 +6,20 @@ import VotingBar from "../components/VotingBar";
 import { Props } from "../constants/types";
 import { useNavigation } from "@react-navigation/native";
 
-import moment from 'moment'
 
-const ProjectListItem = ({ data }: Props) => {
+import moment from 'moment'
+import { Project } from "../src/models";
+
+type ProjectListProps = {
+    data: Project
+}
+
+const ProjectListItem = (props: ProjectListProps) => {
+    const { data } = props;
     const navigation = useNavigation();
-    const openDetailsPage = () => navigation.navigate("DetailScreen");
+    const openDetailsPage = () => navigation.navigate("DetailScreen", { id: data.id });
+
+    console.log(data);
 
     return (
 
@@ -23,44 +32,27 @@ const ProjectListItem = ({ data }: Props) => {
                 }}
             />
             {/* Project Details Row */}
-            <View
-                style={[
-                    styles.container,
-                    {
-                        flexDirection: "row",
-                        padding: 10,
-                    },
-                ]}
-            >
+            <View style={styles.infoRow} >
+                {/* Left side */}
                 <ProfilePicture
                     imageUrl={data.User.image}
                     size={35}
                     margin={7}
                 ></ProfilePicture>
-                <View
-                    style={[
-                        styles.container,
-                        {
-                            flexDirection: "column",
-                        },
-                    ]}
-                >
-                    <Text style={{ alignSelf: "flex-start" }}>{data.title}</Text>
-                    <View
-                        style={[
-                            styles.container,
-                            {
-                                flexDirection: "row",
-                            },
-                        ]}
-                    >
+
+                {/* RightSide */}
+                <View style={styles.rightSide}>
+
+                    <Text>{data.title}</Text>
+                    <View style={styles.votingRow}>
                         <Text style={styles.fs13}>
                             {data.User.name} | {moment(data.createdAt).fromNow()}
                         </Text>
-                        <VotingBar data={data} />
+                        <VotingBar style={{ flex: 1 }} data={data} />
                     </View>
                 </View>
             </View>
+
             <View
                 style={styles.separator}
                 lightColor="#eee"
@@ -73,6 +65,19 @@ const ProjectListItem = ({ data }: Props) => {
 };
 
 const styles = StyleSheet.create({
+    votingRow: {
+        flexDirection: "row",
+
+    },
+    infoRow: {
+        flexDirection: "row",
+        padding: 10
+    },
+    rightSide: {
+        flex: 1,
+        marginHorizontal: 5
+
+    },
     container: {
         flex: 1,
         alignItems: "center",
