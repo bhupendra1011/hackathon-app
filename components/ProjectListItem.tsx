@@ -5,6 +5,7 @@ import ProfilePicture from "../components/ProfilePicture";
 import VotingBar from "../components/VotingBar";
 import { Props } from "../constants/types";
 import { useNavigation } from "@react-navigation/native";
+import { Storage, Analytics } from "aws-amplify"
 
 
 import moment from 'moment'
@@ -17,9 +18,24 @@ type ProjectListProps = {
 const ProjectListItem = (props: ProjectListProps) => {
     const { data } = props;
     const navigation = useNavigation();
-    const openDetailsPage = () => navigation.navigate("DetailScreen", { id: data.id });
+    const [image, setImage] = React.useState<string | null>(null)
 
-    //  console.log(data);
+
+    const openDetailsPage = () => {
+        navigation.navigate("DetailScreen", { id: data.id });
+    }
+
+    //  fetchng image from S3 or DB
+    React.useEffect(() => {
+        //check if url is not from storage
+        if (data.thumbnail.startsWith('http')) {
+            setImage(data.thumbnail)
+        } else {
+            Storage.get(data.thumbnail).then(setImage);
+        }
+
+    }, [data])
+
 
     return (
 
@@ -28,14 +44,14 @@ const ProjectListItem = (props: ProjectListProps) => {
             <Image
                 style={styles.thumbnail}
                 source={{
-                    uri: data.thumbnail,
+                    uri: image,
                 }}
             />
             {/* Project Details Row */}
             <View style={styles.infoRow} >
                 {/* Left side */}
                 <ProfilePicture
-                    imageUrl={data.User.image}
+                    imageUrl={data.User?.image}
                     size={35}
                     margin={7}
                 ></ProfilePicture>
@@ -46,7 +62,7 @@ const ProjectListItem = (props: ProjectListProps) => {
                     <Text>{data.title}</Text>
                     <View style={styles.votingRow}>
                         <Text style={styles.fs13}>
-                            {data.User.name} | {moment(data.createdAt).fromNow()}
+                            {data.User?.name || 'User'} | {moment(data.createdAt).fromNow()}
                         </Text>
                         <VotingBar style={{ flex: 1 }} data={data} />
                     </View>

@@ -11,15 +11,34 @@ export default function HomeScreen() {
 
 
   const [projects, setProjects] = React.useState<Project[]>()
+  const [loading, setLoading] = React.useState(false)
+
+  const fetchProjects = async () => {
+    setLoading(true)
+    try {
+      const projects = await DataStore.query(Project);
+      setProjects(projects)
+
+    } catch (error) {
+      console.log(error);
+    }
+    finally {
+      setLoading(false);
+    }
+  }
 
   React.useEffect(() => {
-    // fetch query
-    DataStore.query(Project).then(setProjects)
+    // fetch query   
+    fetchProjects();
+
   }, [])
 
   return (
 
-    <FlatList data={projects}
+    <FlatList
+      data={projects}
+      refreshing={loading}
+      onRefresh={fetchProjects}
       renderItem={({ item }) => <ProjectListItem data={item} />}
       keyExtractor={(item) => item.id}
     />

@@ -27,5 +27,11 @@
         }
       }
     }
+  },
+  "storage": {
+    "HackathonMedia": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
+    }
   }
 }

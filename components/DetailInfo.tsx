@@ -13,6 +13,7 @@ import Comments from "./Comments";
 
 import { useRoute } from '@react-navigation/native';
 import { Project, Comment } from "../src/models";
+import { Storage } from "aws-amplify"
 
 import { DataStore } from "aws-amplify"
 import moment from "moment";
@@ -24,6 +25,9 @@ export default function DetailInfo() {
     const [project, setProject] = React.useState<Project | null | undefined>(null);
     const [comments, setComments] = React.useState<Comment[]>([]);
 
+    const [image, setImage] = React.useState<string | null>(null);
+    const [videoUrl, setVideoUrl] = React.useState<string | null>(null);
+
     const commentsSheetRef = React.useRef<BottomSheet>(null);
     const color = useThemeColor({}, 'bottomSheet');
 
@@ -34,6 +38,29 @@ export default function DetailInfo() {
     React.useEffect(() => {
         DataStore.query(Project, projectId).then(setProject)
     }, [])
+
+
+    //fetching video from S3 bucket
+    React.useEffect(() => {
+        if (!project) return;
+        //check if video url is not from S3 storage
+        if (project?.videoUrl.startsWith('http')) {
+            setVideoUrl(project.videoUrl)
+        } else {
+            Storage.get(project?.videoUrl).then(setVideoUrl);
+        }
+
+        //check if video thumbnail is not from S3 storage
+        if (project?.thumbnail.startsWith('http')) {
+            setImage(project.thumbnail)
+        } else {
+            Storage.get(project.thumbnail).then(setImage);
+        }
+
+    }, [project])
+
+
+
 
     //fetcing comments of a particular video
     React.useEffect(() => {
@@ -69,7 +96,7 @@ export default function DetailInfo() {
         <>
             <View style={{ ...styles.container }} >
 
-                <VideoPlayer videoURI={project.videoUrl}></VideoPlayer>
+                <VideoPlayer videoURI={videoUrl}></VideoPlayer>
                 <UserInfo data={project} />
 
                 <View
@@ -146,7 +173,7 @@ const UserInfo = ({ data }: Props) => {
                 ]}
             >
                 <ProfilePicture
-                    imageUrl={data.User.image}
+                    imageUrl={data.User?.image}
                     size={35}
                     margin={7}
                 />
@@ -163,7 +190,7 @@ const UserInfo = ({ data }: Props) => {
                     </Text>
                     <View>
                         <Text style={styles.font_small}>
-                            {data.User.name} | {moment(data.createdAt).fromNow()}
+                            {data.User?.name || 'User'} | {moment(data.createdAt).fromNow()}
                         </Text>
 
                     </View>

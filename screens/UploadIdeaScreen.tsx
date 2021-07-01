@@ -8,6 +8,7 @@ import * as ImagePicker from 'expo-image-picker';
 
 import { Text, View } from '../components/Themed';
 import VideoPlayer from '../components/VideoPlayer';
+import 'react-native-get-random-values'
 
 import { v4 as uuidv4 } from "uuid";
 import { Storage, DataStore, Auth } from "aws-amplify";
@@ -102,6 +103,8 @@ export default function UploadIdeaScreen() {
     const userInfo = await Auth.currentAuthenticatedUser();
     const userSub = userInfo.attributes.sub;
     const user = (await DataStore.query(User)).find(u => u.sub === userSub);
+    console.log(fileKey)
+
     if (!user || !fileKey || !thumbnailKey) {
       console.error("Not sufficient data to upload");
       return;
@@ -159,7 +162,7 @@ export default function UploadIdeaScreen() {
       {video && <VideoPlayer videoURI={video} width='80%' style={{ marginTop: 20 }} />}
 
       <Button title="Submit Your Idea" style={styles.btnSubmit} onPress={uploadProject} />
-      <View style={{ width: `${progress * 100}%`, height: 3, backgroundColor: 'blue' }} />
+      <View style={{ width: `${progress * 100}%`, height: 3, backgroundColor: 'red', marginTop: 20 }} />
     </View>
   );
 }
