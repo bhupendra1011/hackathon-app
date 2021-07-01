@@ -43,7 +43,7 @@ export default function DetailInfo() {
             }
 
             const projectComments = (await DataStore.query(Comment)).filter(
-                (comment) => comment.Project.id === project.id
+                (comment) => comment.projectID === project.id
             );
             // console.log(project.id)
             // console.log(projectComments)

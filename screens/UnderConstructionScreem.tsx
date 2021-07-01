@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, Pressable } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import comments from "../assets/data/comments.json";
 
 import { Text, View } from '../components/Themed';
@@ -44,9 +44,9 @@ export default function UnderConstructionScreen() {
             </BottomSheet> */}
 
             {/* LogOut */}
-            <Pressable onPress={onLogout}>
+            <TouchableOpacity onPress={onLogout}>
                 <Text style={styles.title}>LogOut</Text>
-            </Pressable>
+            </TouchableOpacity>
 
 
         </View>

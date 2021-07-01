@@ -1,0 +1,36 @@
+type Comment @model @key(name: "byProject", fields: ["projectID"]) @auth(rules: [{allow: owner, operations: [read, create, update, delete]}, {allow: private, operations: [read, create]}]) @key(name: "byUser", fields: ["userID"]) {
+  id: ID!
+  comment: String!
+  projectID: ID
+  User: User @connection
+  Project: Project @connection
+  userID: ID
+}
+
+type User @model @auth(rules: [{allow: owner, operations: [read, create, update, delete]}, {allow: private, operations: [read, create]}]) {
+  id: ID!
+  name: String!
+  image: String
+  votedTech: Boolean
+  votedCreative: Boolean
+  votedValue: Boolean
+  Projects: [Project] @connection(keyName: "byUser", fields: ["id"])
+  Comments: [Comment] @connection(keyName: "byUser", fields: ["id"])
+  sub: String
+}
+
+type Project @model @key(name: "byUser", fields: ["userID"]) @auth(rules: [{allow: owner, operations: [read, create, update, delete]}, {allow: private, operations: [read, create]}]) {
+  id: ID!
+  title: String!
+  description: String!
+  duration: Float!
+  thumbnail: String!
+  videoUrl: String!
+  techVotes: Int!
+  creativeVotes: Int!
+  valueVotes: Int!
+  User: User @connection
+  Comments: [Comment] @connection(keyName: "byProject", fields: ["id"])
+  userID: ID
+}
+ 

@@ -10,6 +10,7 @@ export declare class Comment {
   readonly projectID?: string;
   readonly User?: User;
   readonly Project?: Project;
+  readonly userID?: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Comment>);
@@ -24,6 +25,8 @@ export declare class User {
   readonly votedCreative?: boolean;
   readonly votedValue?: boolean;
   readonly Projects?: (Project | null)[];
+  readonly Comments?: (Comment | null)[];
+  readonly sub?: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<User>);
