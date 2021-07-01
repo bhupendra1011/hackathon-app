@@ -6,6 +6,8 @@ import VotingBar from "../components/VotingBar";
 import { Props } from "../constants/types";
 import { useNavigation } from "@react-navigation/native";
 
+import moment from 'moment'
+
 const ProjectListItem = ({ data }: Props) => {
     const navigation = useNavigation();
     const openDetailsPage = () => navigation.navigate("DetailScreen");
@@ -53,7 +55,7 @@ const ProjectListItem = ({ data }: Props) => {
                         ]}
                     >
                         <Text style={styles.fs13}>
-                            {data.User.name} | {data.createdAt}
+                            {data.User.name} | {moment(data.createdAt).fromNow()}
                         </Text>
                         <VotingBar data={data} />
                     </View>
