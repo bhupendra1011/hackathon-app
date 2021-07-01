@@ -7,12 +7,19 @@ import VideoPlayer from '../components/VideoPlayer';
 import BottomSheet from '@gorhom/bottom-sheet';
 import Comments from '../components/Comments';
 
+import { Auth } from "aws-amplify";
+
 
 export default function UnderConstructionScreen() {
     const commentsSheetRef = React.useRef<BottomSheet>(null);
     const openComments = () => {
         // open bottom sheet
         commentsSheetRef.current?.expand();
+
+    }
+
+    const onLogout = () => {
+        Auth.signOut();
 
     }
 
@@ -25,7 +32,7 @@ export default function UnderConstructionScreen() {
                 videoURI="https://res.cloudinary.com/dqbrq8pbi/video/upload/v1624810540/hackathon/Zero_Contact_Record_Entry_System_eh1sic.mp4"
                 thumbnailURI="https://i.ibb.co/HrhTkg2/iot-proj.jpg" /> */}
 
-            <Pressable onPress={openComments} style={{ padding: 10, marginVertical: 10 }}>
+            {/* <Pressable onPress={openComments} style={{ padding: 10, marginVertical: 10 }}>
                 <Text>Comments </Text>
             </Pressable>
 
@@ -34,7 +41,12 @@ export default function UnderConstructionScreen() {
                 backgroundComponent={({ style }) => <View style={[style, { backgroundColor: "red" }]} />}
             >
                 <Comments comments={comments} />
-            </BottomSheet>
+            </BottomSheet> */}
+
+            {/* LogOut */}
+            <Pressable onPress={onLogout}>
+                <Text style={styles.title}>LogOut</Text>
+            </Pressable>
 
 
         </View>
