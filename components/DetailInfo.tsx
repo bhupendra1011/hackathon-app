@@ -88,7 +88,7 @@ export default function DetailInfo() {
             <BottomSheet ref={commentsSheetRef} snapPoints={[0, '40%']} index={0}
                 backgroundComponent={({ style }) => <View style={[style, { backgroundColor: color }]} />}
             >
-                <Comments comments={comments} />
+                <Comments comments={comments} projectID={project.id} />
             </BottomSheet>
         </>
     );

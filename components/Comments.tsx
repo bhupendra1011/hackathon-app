@@ -4,17 +4,51 @@ import Comment from './Comment'
 import { BottomSheetFlatList } from '@gorhom/bottom-sheet'
 import { Feather } from '@expo/vector-icons';
 
+import { DataStore, Auth } from "aws-amplify";
 
 import { Text, useThemeColor, View } from './Themed';
 import TextBox from './TextBox';
+import { User, Comment as CommentModel } from '../src/models';
 
-const Comments = ({ comments }) => {
+interface ProjectCommentProps {
+    comments: CommentModel[],
+    projectID: string,
+}
+
+
+const Comments = ({ comments, projectID }: ProjectCommentProps) => {
     const [newComment, setNewComment] = React.useState("");
 
     const color = useThemeColor({}, 'text');
 
-    const submitCommit = () => {
-        console.warn("Submit Feedback");
+    const submitCommit = async () => {
+        // get current authenticated user;
+        const userInfo = await Auth.currentAuthenticatedUser();
+        const userSub = userInfo.attributes.sub;
+        const allUsers = await DataStore.query(User);
+        // console.log(allUsers);
+
+        const user = allUsers.find(u => u.sub === userSub);
+
+        if (!user) {
+            console.error("user not found");
+            return;
+        }
+
+
+
+        await DataStore.save(new CommentModel({
+            comment: newComment,
+            projectID,
+            userID: user.id
+        })
+        );
+        setNewComment("");
+
+
+
+
+
     }
 
 

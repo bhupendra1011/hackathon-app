@@ -19,7 +19,7 @@ const ProjectListItem = (props: ProjectListProps) => {
     const navigation = useNavigation();
     const openDetailsPage = () => navigation.navigate("DetailScreen", { id: data.id });
 
-    console.log(data);
+    //  console.log(data);
 
     return (
 
