@@ -62,7 +62,7 @@ const Comments = ({ comments, projectID }: ProjectCommentProps) => {
                 </Pressable>
             </View>
             <BottomSheetFlatList
-                data={feedbacks}
+                data={comments}
                 renderItem={({ item }) => <Comment comment={item} />}
             />
         </View>

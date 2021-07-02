@@ -29,6 +29,7 @@
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
-    }
+    },
+    "description": "Native App for Android & iOS to manage Hackathon Events.  User can view list of projects , vote for the favorite one , can upload new project, View  other's feedback and provide own as well."
   }
 }

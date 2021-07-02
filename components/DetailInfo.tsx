@@ -73,7 +73,7 @@ export default function DetailInfo() {
                 (comment) => comment.projectID === project.id
             );
             // console.log(project.id)
-            // console.log(projectComments)
+            console.log(projectComments)
 
             setComments(projectComments);
         };
